@@ -15,5 +15,26 @@ pipeline {
           }
          }
         }
+         stage('Build'){
+         parallel {
+                    stage('Build docker image'){
+            steps{
+                script{
+                    sh 'docker build -t doddabasappah/devops-app1 .'
+                }
+            }
+        }
+        stage('Push image to Hub'){
+            steps{
+                script{
+                   withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
+                   sh 'docker login -u doddabasappah -p ${dockerhubpwd}'
+                     }
+                   sh 'docker push doddabasappah/devops-app1'
+                }
+            }
+        }
+         }
+         }
     }
 }
