@@ -58,7 +58,7 @@ pipeline {
             }
          }
          }
-         stage(' Deploy to k8s')
+        stage(' Deploy to k8s'){
               parallel {
                 stage('Deploy app1 to k8s'){
             steps{
@@ -75,7 +75,7 @@ pipeline {
                 }
              }
          }
-
+        }
     
     }
 }
