@@ -3,11 +3,6 @@ pipeline {
     stages{
         stage('checkout'){
          parallel {
-          stage('main branch checkout') {
-              steps{
-              checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/doddabasappa94/parallel-devops.git']]])  
-              }
-              }
           stage ('develop branch checkout') {
               steps{
               checkout([$class: 'GitSCM', branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/doddabasappa94/parallel-devops.git']]])
@@ -27,9 +22,10 @@ pipeline {
         stage('Push image to Hub'){
             steps{
                 script{
-                   withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
+                   withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) 
+                    {
                    sh 'docker login -u doddabasappah -p ${dockerhubpwd}'
-                     }
+                    }
                    sh 'docker push doddabasappah/devops-app2'
                 }
             }
