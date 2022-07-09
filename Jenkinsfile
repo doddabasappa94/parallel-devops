@@ -17,7 +17,7 @@ pipeline {
         }
          stage('Build'){
          parallel {
-                    stage('Build docker image'){
+                    stage('Build docker app1 image'){
             steps{
                 script{
                     sh 'docker build -t doddabasappah/devops-app1 .'
@@ -25,7 +25,7 @@ pipeline {
             }
         }
              
-               stage('Build docker image'){
+               stage('Build docker app2 image'){
             steps{
                 script{
                     sh 'docker build -t doddabasappah/devops-app2 .'
@@ -36,7 +36,7 @@ pipeline {
          }
         stage ('Push') {
             parallel{
-            stage('Push image to Hub'){
+            stage('Push app1 image to Hub'){
              steps{
                 script{
                    withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
@@ -46,7 +46,7 @@ pipeline {
                 }
              }
             }
-            stage('Push image to Hub'){
+            stage('Push app2 image to Hub'){
              steps{
                 script{
                    withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
