@@ -1,11 +1,11 @@
 pipeline {
     agent any
     stages{
-      parallel main: {
+      parallel main:{
           stage('checkout') {
               checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/doddabasappa94/parallel-devops.git']]])
           }
-    }, dev: {
+    }, develop:{
           stage ('checkout') {
               checkout([$class: 'GitSCM', branches: [[name: '*/develop']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/doddabasappa94/parallel-devops.git']]])
           }
