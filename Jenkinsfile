@@ -1,7 +1,7 @@
 pipeline {
     agent any
     stages{
-        stage('checkout')
+        stage('checkout'){
          parallel {
           stage('main branch checkout') {
               steps{
@@ -14,5 +14,6 @@ pipeline {
                 }
           }
          }
+        }
     }
 }
