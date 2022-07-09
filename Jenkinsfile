@@ -58,6 +58,23 @@ pipeline {
             }
          }
          }
+         stage(' Deploy to k8s')
+              parallel {
+                stage('Deploy app1 to k8s'){
+            steps{
+                script{
+                    kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'k8sconfigpwd')
+                }
+            }
+         }
+         stage('Deploy app2 to k8s'){
+            steps{
+                script{
+                    kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'k8sconfigpwd')
+                    }
+                }
+             }
+         }
 
     
     }
