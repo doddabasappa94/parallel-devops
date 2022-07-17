@@ -15,7 +15,7 @@ pipeline {
               }
          }
         }
-         stage('Build'){
+         stage('Build & test'){
          parallel {
                     stage('Build docker app1 image'){
             steps{
